@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, FormView, CreateView
 from .forms import *
 from django.urls import reverse_lazy
+from .forms import DestinationSearchForm
 from .models import *
 
 
