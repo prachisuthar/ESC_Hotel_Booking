@@ -13,5 +13,9 @@ class HomeView(CreateView):
     success_url = reverse_lazy("escapp:home")
 
     def form_valid(self, form):
+        
         return super().form_valid(form)
+
+
+
 
