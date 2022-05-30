@@ -12,8 +12,10 @@ COUNTRY_CHOICES = (
 class DestinationSearch(models.Model):
     country = models.CharField(max_length=250, choices = COUNTRY_CHOICES, default = 'Singapore')
     pax = models.IntegerField()
+    start_date = models.DateField()
+    end_date = models.DateField()
 
 
-    def __str__(self):
-        return self.country()
+    # def __str__(self):
+    #     return self.pax()
 
