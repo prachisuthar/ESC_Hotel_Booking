@@ -24,3 +24,4 @@ class DestinationSearchForm(forms.ModelForm):
         end_date = cleaned_data.get("end_date")
         if end_date < start_date:
             raise forms.ValidationError("End date should be greater than start date.")
+
