@@ -4,6 +4,5 @@ from .views import *
 app_name = "escapp"
 urlpatterns = [
     path("", HomeView.as_view(), name="home"),
-
-    
+   
 ]
