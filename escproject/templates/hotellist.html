@@ -11,13 +11,18 @@
 
 
       <div class="row mt-4">
-        {% for d in destination_list%}
+        {% for d in singapore_list%}
         <div class="col-md-4">
-          <h3>{{d.country}}</h3>
-          <p>{{d.pax}}</p>
-
-          <p class="mt-2">Start date: {{d.start_date}}</p>
-          <p class="mt-2">End date: {{d.end_date}}</p>
+          <h3>Hotel Name: {{d.hotel_name}}</h3>
+          <img
+            src="{{d.image.url}}"
+            alt="Image cannot be seen"
+            width="200"
+            height="200"
+          />
+          <p class="mt-2">Address: {{d.address}}</p>
+          <p class="mt-2">Rating: {{d.rating}}/5</p>
+          <p class="mt-2">Price: ${{d.price}}</p>
           
         </div>
         {% endfor %}
@@ -26,3 +31,4 @@
     <style></style>
   </body>
 </html>
+
