@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel List</title>
+  </head>
+  <body>
+
+
+
+      <div class="row mt-4">
+        {% for d in destination_list%}
+        <div class="col-md-4">
+          <h3>{{d.country}}</h3>
+          <p>{{d.pax}}</p>
+
+          <p class="mt-2">Start date: {{d.start_date}}</p>
+          <p class="mt-2">End date: {{d.end_date}}</p>
+          
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <style></style>
+  </body>
+</html>

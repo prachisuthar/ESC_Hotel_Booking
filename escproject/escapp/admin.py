@@ -4,5 +4,5 @@ from .models import *
 
 
 admin.site.register(
-    [DestinationSearch]
+    [DestinationSearch, CountrySearch]
 )
