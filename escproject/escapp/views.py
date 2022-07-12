@@ -1,16 +1,15 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView, FormView, CreateView
+from django.shortcuts import render, redirect
+from django.views.generic import TemplateView, FormView, CreateView, View
 from .forms import *
 from django.urls import reverse_lazy
-from .forms import DestinationSearchForm
+from .forms import DestinationSearchForm, SignUpForm, LoginForm
 from .models import *
 import json
+from django.contrib.auth import authenticate, login, logout
+
 
 
 #create views here 
-
-
-
 
 # def savedata(request):
 #     json_data = open('destination.json')
@@ -48,9 +47,46 @@ class HotelListView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        # context['country_list'] = DestinationSearch.country.
+
         context['singapore_list'] = SingaporeHotelList.objects.all()
 
         return context
 
             
+class SignUpView(CreateView):
+    template_name = "signup.html"
+    form_class = SignUpForm
+    success_url = reverse_lazy("escapp:home")
 
+    def form_valid(self, form):
+        username = form.cleaned_data.get("username")
+        password = form.cleaned_data.get("password")
+        email = form.cleaned_data.get("email")
+        user = User.objects.create_user(username, email, password)
+        form.instance.user = user
+        login(self.request, user)
+       
+        return super().form_valid(form) #and render(request,"sendemail.html")
+
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect('escapp:home')
+
+class LoginView(FormView):
+    template_name = "login.html"
+    form_class = LoginForm
+    success_url = reverse_lazy("escapp:home")
+
+    def form_valid(self, form):
+        uname = form.cleaned_data.get("username")
+        pword = form.cleaned_data["password"]
+        usr = authenticate(username=uname, password=pword)
+        
+        if usr is not None and usr.customer:
+            login(self.request, usr)
+        else:
+            return render(self.request, self.template_name, {"form": self.form_class, "error": "Invalid Credentials"})
+
+        return super().form_valid(form)

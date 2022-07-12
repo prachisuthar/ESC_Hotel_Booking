@@ -13,7 +13,13 @@
         {% csrf_token %} {{ form.as_p }}
         <button type="submit">Submit</button>
     </form>
+
+    <br>
+    <br>
  
+    <a href="{% url 'escapp:signup' %}"><button>sign up form</button></a>
+    <a href="{% url 'escapp:login' %}"><button>Log In form</button></a>
+
 </body>
 </html>
 
