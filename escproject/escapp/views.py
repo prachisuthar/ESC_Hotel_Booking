@@ -33,13 +33,13 @@ class HomeView(CreateView):
         
         return super().form_valid(form)
 
-    def savedata(request):
-        with open("developer.json", "r") as read_file:
-            developer = json.load(read_file)
-            for result in developer['results']:
-                DestinationSearch.objects.create(
-                country = result['term']
-            )
+    # def savedata(request):
+    #     with open("developer.json", "r") as read_file:
+    #         developer = json.load(read_file)
+    #         for result in developer['results']:
+    #             DestinationSearch.objects.create(
+    #             country = result['term']
+    #         )
 
 
 class HotelListView(TemplateView):
@@ -62,12 +62,12 @@ class SignUpView(CreateView):
     def form_valid(self, form):
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
-        email = form.cleaned_data.get("email")
-        user = User.objects.create_user(username, email, password)
+        confirm_password = form.cleaned_data.get("confirm_password")
+        user = User.objects.create_user(username, confirm_password, password)
         form.instance.user = user
         login(self.request, user)
        
-        return super().form_valid(form) #and render(request,"sendemail.html")
+        return super().form_valid(form) 
 
 class LogoutView(View):
     def get(self, request):
@@ -90,3 +90,8 @@ class LoginView(FormView):
             return render(self.request, self.template_name, {"form": self.form_class, "error": "Invalid Credentials"})
 
         return super().form_valid(form)
+
+class BookingView(CreateView):
+    template_name = "booking.html"
+    form_class = BookingForm
+    success_url = reverse_lazy("escapp:home")   
