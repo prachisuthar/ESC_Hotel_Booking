@@ -55,5 +55,3 @@ class Customer(models.Model):
 
 
 
-
-
