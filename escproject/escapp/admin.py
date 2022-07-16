@@ -4,5 +4,5 @@ from .models import *
 
 
 admin.site.register(
-    [DestinationSearch, SingaporeHotelList, KLHotelList, LondonHotelList, Customer, Booking]
+    [DestinationSearch, SingaporeHotelList, KLHotelList, LondonHotelList, Customer]
 )
