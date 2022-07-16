@@ -31,11 +31,11 @@ class DestinationSearchForm(forms.ModelForm):
 class SignUpForm(forms.ModelForm):
     username = forms.CharField(widget=forms.TextInput())
     password = forms.CharField(widget=forms.PasswordInput())
-    email = forms.EmailField(max_length=200)
+    confirm_password = forms.CharField(widget=forms.PasswordInput())
 
     class Meta:
         model = Customer
-        fields = ["username", "password", "email", "first_name", "last_name", "phone_number"]
+        fields = ["username", "password", "full_name", "password", "confirm_password"]
 
     def clean_username(self):
         uname = self.cleaned_data.get("username")
@@ -48,5 +48,10 @@ class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput())
     password = forms.CharField(widget=forms.PasswordInput()) 
 
+
+class BookingForm(forms.ModelForm):
+    class Meta:
+        model = Booking
+        fields = ["first_name", "last_name", "phone_number","email", "request", "credit_card_no","billing_address", "cvv", "expiry"]
 
 

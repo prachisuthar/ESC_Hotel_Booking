@@ -5,20 +5,19 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-COUNTRY_CHOICES = (
-    ('Singapore','Singapore'),
-    ('London, UK', 'London, UK'),
-    ('Kuala Lumpur, Malaysia','Kuala Lumpur, Malaysia'),
-    )
-
 class DestinationSearch(models.Model):
-    country = models.CharField(max_length=250, choices = COUNTRY_CHOICES, default = 'Singapore')
-    # country = models.CharField(max_length=250)
-    # country = models.ForeignKey(CountrySearch, on_delete=models.CASCADE)
+    country = models.CharField(max_length=250)
     pax = models.PositiveIntegerField()
-    start_date = models.DateField()
-    end_date = models.DateField()
+    start_date = models.DateField(blank=True)
+    end_date = models.DateField(blank=True)
 
+# json_file_path = "trial.json"
+
+# with open(json_file_path, 'r', encoding="utf8") as j:
+#     searchResults = json.loads(j.read())
+
+# for searchResult in searchResults['results']: 
+#     DestinationSearch.objects.create(country = searchResult['term'], pax=searchResult['lng'], start_date = "2000-10-11", end_date = "2000-11-12")
 
 class SingaporeHotelList(models.Model):
     hotel_name = models.CharField(max_length=250)
@@ -45,12 +44,23 @@ class LondonHotelList(models.Model):
 
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.full_name
+
+class Booking(models.Model):
     first_name = models.CharField(max_length=250)
     last_name = models.CharField(max_length=250)
     phone_number = models.PositiveIntegerField()
+    email = models.EmailField()
+    request = models.CharField(max_length=5000)
+    credit_card_no = models.PositiveIntegerField()
+    expiry = models.PositiveBigIntegerField()
+    cvv = models.PositiveIntegerField()
+    billing_address = models.CharField(max_length=500)
 
-    def __str__(self):
-        return self.first_name
+
 
 
 
